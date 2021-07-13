@@ -6,6 +6,7 @@ import (
 	"encoding/base64"
 	"encoding/hex"
 	"log"
+	"math/big"
 	"strings"
 	"unicode"
 )
@@ -113,4 +114,29 @@ func (h Hex) Decode(s string) string {
 		log.Fatalln(err)
 	}
 	return string(dec)
+}
+
+// BigInt encoding tools
+func NewBigInt() Cipher {
+	return BigInt{}
+}
+
+type BigInt struct{}
+
+func (b BigInt) Encode(s string) string {
+	sBigInt, ok := new(big.Int).SetString(s, 10)
+	if !ok {
+		log.Fatalf("error encoding %s", s)
+		return ""
+	}
+	return NewHex().Encode(sBigInt.String())
+}
+
+func (b BigInt) Decode(s string) string {
+	sBigInt, ok := new(big.Int).SetString(s, 16)
+	if !ok {
+		log.Fatalf("error decoding %s", s)
+		return ""
+	}
+	return sBigInt.String()
 }
