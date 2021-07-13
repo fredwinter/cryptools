@@ -133,10 +133,11 @@ func (b BigInt) Encode(s string) string {
 }
 
 func (b BigInt) Decode(s string) string {
-	sBigInt, ok := new(big.Int).SetString(s, 16)
+	sBigIntHex, ok := new(big.Int).SetString(s, 16)
 	if !ok {
 		log.Fatalf("error decoding %s", s)
 		return ""
 	}
-	return sBigInt.String()
+	sBigInt := NewHex().Decode(sBigIntHex.Text(16))
+	return string(sBigInt)
 }
