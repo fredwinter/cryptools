@@ -6,7 +6,7 @@ Cryptools
 * ROT13
 * Caesar
 * Shift
-* Vignere
+* Vigenere
 
 ## License
 Apache 2

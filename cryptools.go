@@ -4,6 +4,7 @@ package cryptools
 
 import (
 	"strings"
+	"unicode"
 )
 
 type Cipher interface {
@@ -11,6 +12,7 @@ type Cipher interface {
 	Decode(string) string
 }
 
+// NewShift returns a Shift Cipher.
 func NewShift(d int) Cipher {
 	if d == 0 || d > 25 || d < -25 {
 		return nil
@@ -22,13 +24,15 @@ type Shift struct {
 	distance int
 }
 
-// Encode is a Shift method that receives a string as parameter and encodes it using the Shift cipher,
+// Encode is a Shift method that receives a string as parameter and encodes it using the Shift Cipher,
 // considering the given distance.
 func (c Shift) Encode(s string) string {
 	s = strings.ToLower(s)
 	var enc string
 	for _, r := range s {
 		switch {
+		case !unicode.IsLetter(r):
+			continue
 		case r+rune(c.distance) > 'z':
 			enc += string(r + rune(c.distance) - 26)
 		case r+rune(c.distance) < 'a':
@@ -40,12 +44,15 @@ func (c Shift) Encode(s string) string {
 	return enc
 }
 
-// Decode is a Shift method that receives a string and decodes it using the Shift cipher, considering the given distance
+// Decode is a Shift method that receives a string as parameter and decodes it using the Shift Cipher,
+// considering the given distance.
 func (c Shift) Decode(s string) string {
 	s = strings.ToLower(s)
 	var dec string
 	for _, r := range s {
 		switch {
+		case !unicode.IsLetter(r):
+			continue
 		case r-rune(c.distance) < 'a':
 			dec += string(r - rune(c.distance) + 26)
 		case r-rune(c.distance) > 'z':
@@ -57,6 +64,12 @@ func (c Shift) Decode(s string) string {
 	return dec
 }
 
+// NewRot13 returns a new Shift Cipher with 13 as distance.
 func NewRot13() Cipher {
 	return NewShift(13)
+}
+
+// NewCaesar returns a new Shift Cipher with 3 as distance.
+func NewCaesar() Cipher {
+	return NewShift(3)
 }
