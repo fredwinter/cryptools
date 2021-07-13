@@ -3,6 +3,8 @@
 package cryptools
 
 import (
+	"encoding/base64"
+	"log"
 	"strings"
 	"unicode"
 )
@@ -72,4 +74,23 @@ func NewRot13() Cipher {
 // NewCaesar returns a new Shift Cipher with 3 as distance.
 func NewCaesar() Cipher {
 	return NewShift(3)
+}
+
+// Base64 encoding tools
+func NewB64() Cipher {
+	return B64{}
+}
+
+type B64 struct{}
+
+func (b B64) Encode(s string) string {
+	return base64.StdEncoding.EncodeToString([]byte(s))
+}
+
+func (b B64) Decode(s string) string {
+	dec, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(dec)
 }
