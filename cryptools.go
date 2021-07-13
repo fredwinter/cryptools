@@ -4,6 +4,7 @@ package cryptools
 
 import (
 	"encoding/base64"
+	"encoding/hex"
 	"log"
 	"strings"
 	"unicode"
@@ -90,7 +91,26 @@ func (b B64) Encode(s string) string {
 func (b B64) Decode(s string) string {
 	dec, err := base64.StdEncoding.DecodeString(s)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
+	}
+	return string(dec)
+}
+
+// Hex encoding tools
+func NewHex() Cipher {
+	return Hex{}
+}
+
+type Hex struct{}
+
+func (h Hex) Encode(s string) string {
+	return hex.EncodeToString([]byte(s))
+}
+
+func (h Hex) Decode(s string) string {
+	dec, err := hex.DecodeString(s)
+	if err != nil {
+		log.Fatalln(err)
 	}
 	return string(dec)
 }
