@@ -36,7 +36,7 @@ func (c Shift) Encode(s string) string {
 	for _, r := range s {
 		switch {
 		case !unicode.IsLetter(r):
-			continue
+			enc += string(r)
 		case r+rune(c.distance) > 'z':
 			enc += string(r + rune(c.distance) - 26)
 		case r+rune(c.distance) < 'a':
@@ -56,7 +56,7 @@ func (c Shift) Decode(s string) string {
 	for _, r := range s {
 		switch {
 		case !unicode.IsLetter(r):
-			continue
+			dec += string(r)
 		case r-rune(c.distance) < 'a':
 			dec += string(r - rune(c.distance) + 26)
 		case r-rune(c.distance) > 'z':
