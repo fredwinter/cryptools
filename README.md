@@ -1,12 +1,15 @@
 Cryptools
 =
 
-## Tools for encryption
-### Ciphers:
+## Tools for simple encryption
+### Encodings and Ciphers:
 * ROT13
 * Caesar
 * Shift
-* Vigenere
+* BigInt
+* Hex
+* Base64
+* XOR
 
 ## License
 Apache 2
