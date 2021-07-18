@@ -4,5 +4,7 @@ package cryptools
 Encode and Decode.*/
 type Cipher interface {
 	Encode([]byte) []byte
+	EncodeToString([]byte) string
 	Decode([]byte) []byte
+	DecodeString(string) []byte
 }
