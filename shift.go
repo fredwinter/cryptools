@@ -20,42 +20,52 @@ type Shift struct {
 
 /* Encode is a Shift's method that encodes a slice of bytes and returns it
 using the Shift Cipher, considering the given distance, and returns it as
-a slice of bytes.*/
-func (c Shift) Encode(s string) string {
-	s = strings.ToLower(s)
-	var enc string
+a slice of bytes. */
+func (c Shift) Encode(m []byte) []byte {
+	s := strings.ToLower(string(m))
+	enc := make([]byte, len(m))
 	for _, r := range s {
 		switch {
 		case !unicode.IsLetter(r):
-			enc += string(r)
+			enc = append(enc, byte(r))
 		case r+rune(c.distance) > 'z':
-			enc += string(r + rune(c.distance) - 26)
+			enc = append(enc, byte(r+rune(c.distance)-26))
 		case r+rune(c.distance) < 'a':
-			enc += string(r + rune(c.distance) + 26)
+			enc = append(enc, byte(r+rune(c.distance)+26))
 		default:
-			enc += string(r + rune(c.distance))
+			enc = append(enc, byte(r+rune(c.distance)))
 		}
 	}
 	return enc
 }
 
+// EncodeToString returns a string using the Cipher's Encode method.
+func (c Shift) EncodeToString(m []byte) string {
+	return string(c.Encode(m))
+}
+
 /* Decode is a Shift's method that decodes a slice of bytes using the
 Shift Cipher, considering the given distance, and returns it as a
-a slice of bytes.*/
-func (c Shift) Decode(s string) string {
-	s = strings.ToLower(s)
-	var dec string
+a slice of bytes. */
+func (c Shift) Decode(m []byte) []byte {
+	s := strings.ToLower(string(m))
+	dec := make([]byte, len(m))
 	for _, r := range s {
 		switch {
 		case !unicode.IsLetter(r):
-			dec += string(r)
+			dec = append(dec, byte(r))
 		case r-rune(c.distance) < 'a':
-			dec += string(r - rune(c.distance) + 26)
+			dec = append(dec, byte(r-rune(c.distance)+26))
 		case r-rune(c.distance) > 'z':
-			dec += string(r - rune(c.distance) - 26)
+			dec = append(dec, byte(r-rune(c.distance)-26))
 		default:
-			dec += string(r - rune(c.distance))
+			dec = append(dec, byte(r-rune(c.distance)))
 		}
 	}
 	return dec
+}
+
+// DecodeString decodes a string using the Cipher's Decode method.
+func (c Shift) DecodeString(m string) []byte {
+	return c.Decode([]byte(m))
 }
