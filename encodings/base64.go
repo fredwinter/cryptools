@@ -1,4 +1,4 @@
-package cryptools
+package encodings
 
 import (
 	"bytes"
