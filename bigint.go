@@ -27,8 +27,8 @@ func (b BigInt) EncodeToString(m []byte) string {
 /* Decode is a BigInt's method that decodes a slice of bytes using the BigInt Cipher and
 returns it in the form of a slice of bytes.*/
 func (b BigInt) Decode(m []byte) []byte {
-	sBigInt := new(big.Int).SetBytes(m)
-	return NewHex().Decode([]byte(sBigInt.Text(16)))
+	BigInt := new(big.Int).SetBytes(m)
+	return NewHex().Decode(BigInt.Bytes())
 }
 
 // DecodeString decodes a string using the Cipher's Decode method.
