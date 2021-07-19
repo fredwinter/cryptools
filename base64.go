@@ -15,7 +15,7 @@ type B64 struct{}
 /* Encode is a B64's method that encodes a slice of bytes using the base64 encoding and
 returns it in the form of a slice of bytes. */
 func (b B64) Encode(m []byte) []byte {
-	enc := make([]byte, len(m))
+	var enc []byte
 	base64.StdEncoding.Encode(enc, m)
 	return enc
 }
@@ -28,7 +28,7 @@ func (b B64) EncodeToString(m []byte) string {
 /* Decode is a B64's method that decodes a slice of bytes using the base64 encoding and
 returns it in the form of a slice of bytes. */
 func (b B64) Decode(m []byte) []byte {
-	dec := make([]byte, len(m))
+	var dec []byte
 	base64.StdEncoding.Decode(dec, m)
 	return dec
 }

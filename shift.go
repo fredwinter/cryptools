@@ -23,7 +23,7 @@ using the Shift Cipher, considering the given distance, and returns it as
 a slice of bytes. */
 func (c Shift) Encode(m []byte) []byte {
 	s := strings.ToLower(string(m))
-	enc := make([]byte, len(m))
+	var enc []byte
 	for _, r := range s {
 		switch {
 		case !unicode.IsLetter(r):
@@ -49,7 +49,7 @@ Shift Cipher, considering the given distance, and returns it as a
 a slice of bytes. */
 func (c Shift) Decode(m []byte) []byte {
 	s := strings.ToLower(string(m))
-	dec := make([]byte, len(m))
+	var dec []byte
 	for _, r := range s {
 		switch {
 		case !unicode.IsLetter(r):
