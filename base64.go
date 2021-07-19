@@ -6,7 +6,7 @@ import (
 )
 
 // NewB64 returns a B64 encoding object.
-func NewB64() Cipher {
+func NewB64() Encoding {
 	return B64{}
 }
 
@@ -21,7 +21,7 @@ func (b B64) Encode(m []byte) []byte {
 	return enc
 }
 
-// EncodeToString returns a string using the Cipher's Encode method.
+// EncodeToString returns a string using the Encoding's Encode method.
 func (b B64) EncodeToString(m []byte) string {
 	return string(b.Encode(m))
 }
@@ -34,7 +34,7 @@ func (b B64) Decode(m []byte) []byte {
 	return bytes.Trim(dec, "\x00")
 }
 
-// DecodeString decodes a string using the Cipher's Decode method.
+// DecodeString decodes a string using the Encoding's Decode method.
 func (b B64) DecodeString(m string) []byte {
 	return b.Decode([]byte(m))
 }

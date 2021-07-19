@@ -5,7 +5,7 @@ import (
 )
 
 // NewHex returns a Hex encoding object.
-func NewHex() Cipher {
+func NewHex() Encoding {
 	return Hex{}
 }
 

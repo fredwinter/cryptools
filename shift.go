@@ -18,10 +18,10 @@ type Shift struct {
 	distance int
 }
 
-/* Encode is a Shift's method that encodes a slice of bytes and returns it
+/* Encrypt is a Shift's method that encrypts a slice of bytes and returns it
 using the Shift Cipher, considering the given distance, and returns it as
 a slice of bytes. */
-func (c Shift) Encode(m []byte) []byte {
+func (c Shift) Encrypt(m []byte) []byte {
 	s := strings.ToLower(string(m))
 	var enc []byte
 	for _, r := range s {
@@ -39,15 +39,15 @@ func (c Shift) Encode(m []byte) []byte {
 	return enc
 }
 
-// EncodeToString returns a string using the Cipher's Encode method.
-func (c Shift) EncodeToString(m []byte) string {
-	return string(c.Encode(m))
+// EncryptToString returns a string using the Cipher's Encrypt method.
+func (c Shift) EncryptToString(m []byte) string {
+	return string(c.Encrypt(m))
 }
 
-/* Decode is a Shift's method that decodes a slice of bytes using the
+/* Decrypt is a Shift's method that decrypts a slice of bytes using the
 Shift Cipher, considering the given distance, and returns it as a
 a slice of bytes. */
-func (c Shift) Decode(m []byte) []byte {
+func (c Shift) Decrypt(m []byte) []byte {
 	s := strings.ToLower(string(m))
 	var dec []byte
 	for _, r := range s {
@@ -65,7 +65,7 @@ func (c Shift) Decode(m []byte) []byte {
 	return dec
 }
 
-// DecodeString decodes a string using the Cipher's Decode method.
-func (c Shift) DecodeString(m string) []byte {
-	return c.Decode([]byte(m))
+// DecryptString decrypts a string using the Cipher's Decrypt method.
+func (c Shift) DecryptString(m string) []byte {
+	return c.Decrypt([]byte(m))
 }
