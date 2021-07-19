@@ -15,7 +15,7 @@ type Hex struct{}
 /* Encode is a Hex's method that encodes a slice of bytes using the hex encoding
 and returns it in the form of a slice of bytes. */
 func (h Hex) Encode(m []byte) []byte {
-	enc := make([]byte, len(m))
+	enc := make([]byte, hex.EncodedLen(len(m)))
 	hex.Encode(enc, m)
 	return enc
 }
@@ -28,7 +28,7 @@ func (h Hex) EncodeToString(m []byte) string {
 /* Decode is a Hex's method that decodes a slice of bytes using the hex encoding
 and returns it in the form of a slice of bytes. */
 func (h Hex) Decode(m []byte) []byte {
-	dec := make([]byte, len(m))
+	dec := make([]byte, hex.DecodedLen(len(m)))
 	hex.Decode(dec, m)
 	return dec
 }
