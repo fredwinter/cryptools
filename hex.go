@@ -20,7 +20,7 @@ func (h Hex) Encode(m []byte) []byte {
 	return enc
 }
 
-// EncodeToString returns a string using the Cipher's Encode method.
+// EncodeToString returns a string using the Encoding's Encode method.
 func (h Hex) EncodeToString(m []byte) string {
 	return string(h.Encode(m))
 }
@@ -33,7 +33,7 @@ func (h Hex) Decode(m []byte) []byte {
 	return dec
 }
 
-// DecodeString decodes a string using the Cipher's Decode method.
+// DecodeString decodes a string using the Encoding's Decode method.
 func (h Hex) DecodeString(m string) []byte {
 	return h.Decode([]byte(m))
 }
