@@ -2,13 +2,16 @@ Cryptools
 =
 
 ## Tools for simple encryption
-### Encodings and Ciphers:
-* ROT13
-* Caesar
-* Shift
+
+### Encodings
 * BigInt
 * Hex
 * Base64
+
+### Ciphers
+* ROT13
+* Caesar
+* Shift
 * XOR
 
 ## License
