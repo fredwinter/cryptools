@@ -1,3 +1,3 @@
-module encodings
+module github.com/scnprt/cryptools/encodings
 
 go 1.16
